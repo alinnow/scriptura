@@ -11,6 +11,7 @@ This fish version has a few differences from the original `sd`:
 - Flags for `scriptura` must be placed before any arguments, unlike the original where flags could come after arguments
 - `--really` flag has been removed (the above constraint makes it no longer necessary)
 - `--` can be used to separate arguments intended for `scriptura` itself from those intended for the executed command
+- [Choose your own short alias](#shorter-command-name)
 
 ## Motivation
 
