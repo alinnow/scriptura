@@ -31,9 +31,29 @@ If you're using Nix, `scriptura` is available as a flake, intended for use with 
 inputs.scriptura.url = "git+https://codeberg.org/alinnow/scriptura";
 ```
 
+Add the overlay:
+
 ```nix
-programs.script-directory.package = inputs.scriptura.packages.${system}.scriptura;
+overlays = [
+  scriptura.overlays.default
+]
 ```
+
+And then configure the script-directory module:
+
+```nix
+programs.script-directory = {
+  enable = true;
+  package = pkgs.scriptura
+  settings = {
+    SD_ROOT = "${config.home.homeDirectory}/.sd";
+    SD_EDITOR = "nvim";
+    SD_CAT = "lolcat"; 
+  };
+};
+```
+
+Any `SD_*` variables will be respected as long as their `SCRIPTURA_*` counterpart is not set.
 
 ### Manual Installation
 
