@@ -23,6 +23,8 @@ I also thought that a fish implementation would be cleaner.
 
 ## Installation
 
+Currently, installation via Nix is the only known method. Installation via a fish plugin manager will probably work, but is untested. Feedback on this would be appreciated.
+
 ### Using Nix
 
 If you're using Nix, `scriptura` is available as a flake, intended for use with home-manager and the script-directory module:
@@ -54,23 +56,6 @@ programs.script-directory = {
 ```
 
 Any `SD_*` variables will be respected as long as their `SCRIPTURA_*` counterpart is not set.
-
-### Manual Installation
-
-1. Clone this repository:
-   ```fish
-   git clone https://codeberg.org/alinnow/scriptura
-   ```
-
-2. Add the function to your fish functions directory:
-   ```fish
-   ln -s $PWD/functions/scriptura.fish ~/.config/fish/functions/scriptura.fish
-   ```
-
-3. Add the completion to your fish completions directory:
-   ```fish
-   ln -s $PWD/completions/scriptura.fish ~/.config/fish/completions/scriptura.fish
-   ```
 
 ### Shorter command name
 
