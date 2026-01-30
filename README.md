@@ -106,7 +106,7 @@ If such a file does not exist, any comments in the script (excluding shebang) ar
 The following environment variables can be used to configure `scriptura`:
 
 - `SCRIPTURA_ROOT`: location of the script directory. Defaults to `$HOME/sd`.
-- `SCRIPTURA_EDITOR`: used by `scriptura foo --edit` and `scriptura foo --new`. Defaults to `$VISUAL`, then `$EDITOR`, then, if neither of those are set, tries `vim`,`nano`, and finally, `vi`.
+- `SCRIPTURA_EDITOR`: used by `scriptura --edit foo` and `scriptura --new foo`. Defaults to `$VISUAL`, then `$EDITOR`, then, if neither of those are set, tries `vim`,`nano`, and finally, `vi`.
 - `SCRIPTURA_CAT`: program used when printing files, in case you want to use something like `bat`. Defaults to `cat`.
 
 If not defined, each variable will try the `SD_` equivalent before using default values.
