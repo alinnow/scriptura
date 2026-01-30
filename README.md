@@ -61,7 +61,7 @@ Any `SD_*` variables will be respected as long as their `SCRIPTURA_*` counterpar
 
 Who wants to type out the name `scriptura` every time? Not me. 
 
-I find `sf` to be nice to type and it doesn't clash with anything, but you can choose. Aliases in fish inherit the completion of the parent.
+I find `sf` (*s*cript *f*older) to be nice to type and it doesn't clash with anything, but you can choose. Aliases in fish automatically inherit the completion of the parent.
 
 ```fish
 alias --save sf scriptura
