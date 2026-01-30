@@ -76,6 +76,7 @@ home.shellAliases.sf = "scriptura";
 ## Usage
 
 The default behaviour for `scriptura foo bar` is:
+
 - Assume scripts are under `~/sd`.
 - If `~/sd/foo` is an executable file, execute `~/sd/foo bar`.
 - If `~/sd/foo/bar` is an executable file, execute it with no arguments.
