@@ -92,6 +92,15 @@ The default behaviour for `scriptura foo bar` is:
 - `--cat`: Print the contents of the script
 - `--which`: Print the path of the script
 
+#### Help
+
+The `--help` switch prints the content of a help file or comments inside a script.
+
+For directories, the content of a file called `help` will be printed, if it exists. `scriptura --help nix` would print the contents of `~/sd/nix/help`.
+
+Given a script at `~/sd/foo/bar`, `--help` will print the contents of a corresponding file with the `.help` extension, in this case `~/sd/foo/bar.help`.
+If such a file does not exist, any comments in the script (excluding shebang) are printed instead.
+
 ## Configuration
 
 The following environment variables can be used to configure `scriptura`:
