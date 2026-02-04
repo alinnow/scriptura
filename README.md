@@ -8,8 +8,7 @@ Just like the original `sd`, you can organise your scripts in a logical director
 
 This fish version has a few differences from the original `sd`:
 
-- Flags for `scriptura` must be placed before any arguments, unlike the original where flags could come after arguments
-- `--really` flag has been removed (the above constraint makes it no longer necessary)
+- Uses subcommands instead of flags (`scriptura new` vs `sd -new`)
 - `--` can be used to separate arguments intended for `scriptura` itself from those intended for the executed command
 - [Choose your own short alias](#shorter-command-name)
 
@@ -19,7 +18,7 @@ The command name `sd` conflicts with [chmln/sd](https://github.com/chmln/sd) (a 
 
 `sd` doesn't include completions for fish and the linked gist seems to have been removed.
 
-I also thought that a fish implementation would be cleaner.
+I also thought that a fish implementation would be cleaner. 
 
 ## Installation
 
@@ -61,21 +60,27 @@ Any `SD_*` variables will be respected as long as their `SCRIPTURA_*` counterpar
 
 Who wants to type out the name `scriptura` every time? Not me. 
 
-I find `sf` (*s*cript *f*older) to be nice to type and it doesn't clash with anything, but you can choose. Aliases in fish automatically inherit the completion of the parent.
+I find `sf` (*s*cript *f*older) to be nice to type and it doesn't clash with anything, but you can choose. 
 
 ```fish
-alias --save sf scriptura
+alias --save sf "scriptura run"
+alias --save sfm "scriptura"
 ```
+
+Aliases in fish automatically inherit the completion of the parent, including subcommands. So with these aliases, `sf <tab>` will only show scripts to be run, whereas `sfm <tab>` will show all subcommands.
 
 In home-manager you can do this with
 
 ```nix
-home.shellAliases.sf = "scriptura";
+home.shellAliases = {
+  sf = "scriptura run";
+  sfm = "scriptura";
+};
 ```
 
 ## Usage
 
-The default behaviour for `scriptura foo bar` is:
+The default behaviour for `scriptura run foo bar` is:
 
 - Assume scripts are under `~/sd`.
 - If `~/sd/foo` is an executable file, execute `~/sd/foo bar`.
@@ -83,23 +88,24 @@ The default behaviour for `scriptura foo bar` is:
 - If `~/sd/foo/bar` is a directory, it prints usage information.
 - If `~/sd/foo/bar` is a non-executable regular file, it just prints the file out.
 
-### Special Flags
+### Subcommands
 
-`scriptura` supports several special flags that override normal execution:
+`scriptura` accepts the following subcommands:
 
-- `--help`: Print help information
-- `--new`: Create a new script
-- `--edit`: Open the script in an editor
-- `--cat`: Print the contents of the script
-- `--which`: Print the path of the script
+- `run`: Run the script
+- `help`: Print help information
+- `new`: Create a new script
+- `edit`: Open the script in an editor
+- `cat`: Print the contents of the script
+- `which`: Print the path of the script
 
 #### Help
 
-The `--help` switch prints the content of a help file or comments inside a script.
+The `help` subcommand prints the content of a help file or comments inside a script.
 
-For directories, the content of a file called `help` will be printed, if it exists. `scriptura --help nix` would print the contents of `~/sd/nix/help`.
+For directories, the content of a file called `help` will be printed, if it exists. `scriptura help nix` would print the contents of `~/sd/nix/help`.
 
-Given a script at `~/sd/foo/bar`, `--help` will print the contents of a corresponding file with the `.help` extension, in this case `~/sd/foo/bar.help`.
+Given a script at `~/sd/foo/bar`, `scriptura help foo bar` will print the contents of a corresponding file with the `.help` extension, in this case `~/sd/foo/bar.help`.
 If such a file does not exist, any comments in the script (excluding shebang) are printed instead.
 
 ## Configuration
@@ -107,7 +113,7 @@ If such a file does not exist, any comments in the script (excluding shebang) ar
 The following environment variables can be used to configure `scriptura`:
 
 - `SCRIPTURA_ROOT`: location of the script directory. Defaults to `$HOME/sd`.
-- `SCRIPTURA_EDITOR`: used by `scriptura --edit foo` and `scriptura --new foo`. Defaults to `$VISUAL`, then `$EDITOR`, then, if neither of those are set, tries `vim`,`nano`, and finally, `vi`.
+- `SCRIPTURA_EDITOR`: used by `scriptura edit foo` and `scriptura new foo`. Defaults to `$VISUAL`, then `$EDITOR`, then, if neither of those are set, tries `vim`,`nano`, and finally, `vi`.
 - `SCRIPTURA_CAT`: program used when printing files, in case you want to use something like `bat`. Defaults to `cat`.
 
 If not defined, each variable will try the `SD_` equivalent before using default values.
