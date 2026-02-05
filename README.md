@@ -11,6 +11,7 @@ This fish version has a few differences from the original `sd`:
 - Uses subcommands instead of flags (`scriptura new` vs `sd -new`)
 - `--` can be used to separate arguments intended for `scriptura` itself from those intended for the executed command
 - [Choose your own short alias](#shorter-command-name)
+- A new `cmd` subcommand for running external commands on scripts (e.g. `scriptura cmd foobar -- rm`)
 
 ## Motivation
 
