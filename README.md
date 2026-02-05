@@ -26,7 +26,7 @@ Currently, installation via Nix is the only known method. Installation via a fis
 
 ### Using Nix
 
-If you're using Nix, `scriptura` is available as a flake, intended for use with home-manager and the script-directory module:
+If you're using Nix, `scriptura` is available as a flake, intended for use with home-manager:
 
 ```nix
 inputs.scriptura.url = "git+https://codeberg.org/alinnow/scriptura";
