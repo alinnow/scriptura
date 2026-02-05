@@ -134,7 +134,7 @@ scriptura tree
 2 directories, 1 file
 ```
 
-Flags and arguments can be passed to the subcommand by adding them after the subcommand name: `scriptura tree -L1 foo`
+Flags and arguments can be passed to the subcommand by adding them after the subcommand name: `scriptura tree -L1 foo bar -- baz`. Note that `foo bar` in this example would be interpreted as a script path, so the command would be expanded to `tree -L1 foo/bar baz`
 
 ## Configuration
 
