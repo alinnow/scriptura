@@ -12,6 +12,7 @@ This fish version has a few differences from the original `sd`:
 - `--` can be used to separate arguments intended for `scriptura` itself from those intended for the executed command
 - [Choose your own short alias](#shorter-command-name)
 - A new `cmd` subcommand for running external commands on scripts (e.g. `scriptura cmd foobar -- rm`)
+- [Add your own subcommands](#custom-subcommands) by placing them under `$SCRIPTURA_ROOT/scriptura`
 
 ## Motivation
 
@@ -110,6 +111,30 @@ For directories, the content of a file called `help` will be printed, if it exis
 
 Given a script at `~/sd/foo/bar`, `scriptura help foo bar` will print the contents of a corresponding file with the `.help` extension, in this case `~/sd/foo/bar.help`.
 If such a file does not exist, any comments in the script (excluding shebang) are printed instead.
+
+#### Custom subcommands
+
+You can add your own subcommands by placing them under `$SCRIPTURA_ROOT/scriptura`. Adding a tree subcommand would look like this:
+
+```fish
+scriptura new scriptura tree -- tree
+```
+
+Then you can run the new command like so (note: no `run` subcommand)
+
+```fish
+scriptura tree
+```
+
+```
+.
+└── scriptura
+    └── tree
+
+2 directories, 1 file
+```
+
+Flags and arguments can be passed to the subcommand by adding them after the subcommand name: `scriptura tree -L1 foo`
 
 ## Configuration
 
