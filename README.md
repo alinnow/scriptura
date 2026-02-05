@@ -40,21 +40,21 @@ overlays = [
 ]
 ```
 
-And then configure the script-directory module:
+And then configure the scriptura module:
 
 ```nix
-programs.script-directory = {
+programs.scriptura = {
   enable = true;
-  package = pkgs.scriptura
+  package = pkgs.scriptura;
   settings = {
-    SD_ROOT = "${config.home.homeDirectory}/.sd";
-    SD_EDITOR = "nvim";
-    SD_CAT = "lolcat"; 
+    ROOT = "${config.home.homeDirectory}/.sd";
+    EDITOR = "nvim";
+    CAT = "lolcat";
   };
 };
 ```
 
-Any `SD_*` variables will be respected as long as their `SCRIPTURA_*` counterpart is not set.
+The `settings` attribute accepts environment variable suffixes (e.g., `ROOT` becomes `SCRIPTURA_ROOT`). For a list of available options, see the [configuration documentation](#configuration).
 
 ### Shorter command name
 
@@ -72,11 +72,13 @@ Aliases in fish automatically inherit the completion of the parent, including su
 In home-manager you can do this with
 
 ```nix
-home.shellAliases = {
+programs.scriptura.shellAliases = {
   sf = "scriptura run";
   sfm = "scriptura";
 };
 ```
+
+(This is just another way to set `home.shellAliases`).
 
 ## Usage
 
@@ -117,3 +119,24 @@ The following environment variables can be used to configure `scriptura`:
 - `SCRIPTURA_CAT`: program used when printing files, in case you want to use something like `bat`. Defaults to `cat`.
 
 If not defined, each variable will try the `SD_` equivalent before using default values.
+
+In home-manager, use the `settings` option. Prefixes are optional (added by module; this won't overwrite `$EDITOR`)
+
+```nix
+programs.scriptura.settings = {
+  ROOT = "${config.home.homeDirectory}/.sd";
+  EDITOR = "nvim";
+  CAT = "lolcat";
+};
+```
+
+Or using full variable names:
+
+```nix
+programs.scriptura.settings = {
+  SCRIPTURA_ROOT = "${config.home.homeDirectory}/.sd";
+  SD_EDITOR = "nvim";  # also works for easy migration
+};
+```
+
+The `SD_` prefixed variables are automatically converted to their `SCRIPTURA_` equivalents. If both prefixes are defined for the same variable, `SCRIPTURA_` takes precedence.
