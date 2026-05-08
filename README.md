@@ -26,6 +26,8 @@ I also thought that a fish implementation would be cleaner.
 
 Currently, installation via Nix is the only known method. Installation via a fish plugin manager will probably work, but is untested. Feedback on this would be appreciated.
 
+- [fisher](https://github.com/jorgebucaran/fisher) only supports GitHub and Gitlab. There is an [issue for Codeberg support](https://github.com/jorgebucaran/fisher/issues/733), but it's closed.
+
 ### Using Nix
 
 If you're using Nix, `scriptura` is available as a flake, intended for use with home-manager:
